@@ -13,7 +13,7 @@ module.exports = {
   devServer:{
     port:9000,
     contentBase:path.join(__dirname,"build"),
-    historyApiFallback:true
+    historyApiFallback:true // 
   },
   module:{
     rules:[
