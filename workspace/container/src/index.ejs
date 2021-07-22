@@ -29,6 +29,7 @@
 
     More information about shared dependencies can be found at https://single-spa.js.org/docs/recommended-setup#sharing-with-import-maps.
   -->
+  <!-- js模块下载地址 此处可放置微前端项目中的公共模块  -->
   <script type="systemjs-importmap">
     {
       "imports": {
@@ -36,6 +37,7 @@
       }
     }
   </script>
+  <!-- single-spa预加载 -->
   <link rel="preload" href="https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js" as="script">
 
   <!-- Add your organization's prod import map URL to this script's src  -->
@@ -45,7 +47,8 @@
   <script type="systemjs-importmap">
     {
       "imports": {
-        "@study/root-config": "//localhost:9000/study-root-config.js"
+        "@study/root-config": "//localhost:9000/study-root-config.js",
+        "@study/common":"//localhost:9001/study-common.js"
       }
     }
   </script>
@@ -56,13 +59,15 @@
     Learn more about why at https://single-spa.js.org/docs/ecosystem-angular/#zonejs
   -->
   <!-- <script src="https://cdn.jsdelivr.net/npm/zone.js@0.11.3/dist/zone.min.js"></script> -->
-
+  <!-- 用于覆盖通过 import-map 设置的JS模块下载地址 -->
   <script src="https://cdn.jsdelivr.net/npm/import-map-overrides@2.2.0/dist/import-map-overrides.js"></script>
   <% if (isLocal) { %>
   <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.js"></script>
   <% } else { %>
+    <!-- 模块加载器 -->
   <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.min.js"></script>
+  <!-- systemjs 用来解析AMD模块的插件 -->
   <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.min.js"></script>
   <% } %>
 </head>
@@ -72,8 +77,15 @@
   </noscript>
   <main></main>
   <script>
+    //导入 微前端容器应用
     System.import('@study/root-config');
   </script>
+  <!-- 
+    import-map-overrides 可以覆盖导入映射
+    当前项目中用于配合 single-spa Inspector 调试工具使用
+    可以手动覆盖项目中的JS模块加载地址，用于调试
+  
+  -->
   <import-map-overrides-full show-when-local-storage="devtools" dev-libs></import-map-overrides-full>
 </body>
 </html>

@@ -6,13 +6,28 @@ import { registerApplication, start } from "single-spa";
  * app : 返回Promise ， 通过systemjs引用打包好的微前端应用模块代码（UMD）
  * activeWhen ： 路由匹配时激活应用
  */
+// registerApplication({
+//   name: "@single-spa/welcome",
+//   app: () =>
+//     System.import(
+//       "https://unpkg.com/single-spa-welcome/dist/single-spa-welcome.js"
+//     ),
+//   activeWhen: ["/"],
+// });
+registerApplication("@single-spa/welcome", () =>
+  System.import(
+    "https://unpkg.com/single-spa-welcome/dist/single-spa-welcome.js"
+  ),
+
+  location => location.pathname === '/')
+
 registerApplication({
-  name: "@single-spa/welcome",
+  name: "@study/common",
   app: () =>
     System.import(
-      "https://unpkg.com/single-spa-welcome/dist/single-spa-welcome.js"
+      "@study/common"
     ),
-  activeWhen: ["/"],
+  activeWhen: ["/common"],
 });
 
 // registerApplication({

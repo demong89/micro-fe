@@ -1,4 +1,8 @@
 systemjs-react/node_modules
 workspace/container/node_modules
+workspace/common/node_modules
 workspace/container/.husky
 node_modules
+
+
+.DS_Store
