@@ -1,8 +1,18 @@
 systemjs-react/node_modules
 workspace/container/node_modules
 workspace/common/node_modules
+workspace/todos/node_modules
+workspace/realworld/node_modules
+workspace/parcel/node_modules
+
+module-federations/cart/node_modules
+module-federations/container/node_modules
+module-federations/products/node_modules
+
+
 workspace/container/.husky
 node_modules
 
 
 .DS_Store
+ workspace/.DS_Store

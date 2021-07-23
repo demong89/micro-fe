@@ -1,5 +1,18 @@
 import { registerApplication, start } from "single-spa";
+import { constructApplications, constructRoutes } from "single-spa-layout"
 
+
+// 获取路由配置对象
+const routes = constructRoutes(document.querySelector("#single-spa-layout"))
+// 获取路由信息数组
+const applications = constructApplications({
+  routes,
+  loadApp({ name }) {
+    return System.import(name)
+  }
+})
+// 遍历路由信息注册应用
+applications.forEach(registerApplication)
 /**
  * 注册微前端应用
  * name: 微前端应用名称  “@组织名称/应用名称”
@@ -14,22 +27,32 @@ import { registerApplication, start } from "single-spa";
 //     ),
 //   activeWhen: ["/"],
 // });
-registerApplication("@single-spa/welcome", () =>
-  System.import(
-    "https://unpkg.com/single-spa-welcome/dist/single-spa-welcome.js"
-  ),
+// registerApplication("@single-spa/welcome", () =>
+//   System.import(
+//     "https://unpkg.com/single-spa-welcome/dist/single-spa-welcome.js"
+//   ),
 
-  location => location.pathname === '/')
+//   location => location.pathname === '/')
 
-registerApplication({
-  name: "@study/common",
-  app: () =>
-    System.import(
-      "@study/common"
-    ),
-  activeWhen: ["/common"],
-});
+// registerApplication({
+//   name: "@study/common",
+//   app: () =>
+//     System.import(
+//       "@study/common"
+//     ),
+//   activeWhen: ["/common"],
+// });
+// registerApplication({
+//   name: "@study/todos",
+//   app: () => System.import("@study/todos"),
+//   activeWhen: ["/todos"]
+// })
 
+// registerApplication({
+//   name: "@study/realworld",
+//   app: () => System.import("@study/realworld"),
+//   activeWhen: ["/realworld"]
+// })
 // registerApplication({
 //   name: "@study/navbar",
 //   app: () => System.import("@study/navbar"),
