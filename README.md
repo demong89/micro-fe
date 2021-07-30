@@ -9,6 +9,9 @@ npm install webpack@5.17.0 webpack-cli@4.5.0 webpack-dev-server@3.11.2 html-webp
 
 TypeError: cli.isValidationError is not a function
 []
-## 文件夹含义
+## 文件夹含义/workspace
 + container 容器应用
++ realworld vue微应用
++ todos react微应用
++ common 普通微应用
 
